@@ -23,17 +23,19 @@ class NoteItem extends React.Component {
                     <p className="note-item__body">{note.body}</p>
                 </div>
                 <div className="note-item__action">
-                    {note.archived === false ? (
-                        <button className="note-item__archive-button" onClick={this.onArchiveEvent}>
-                            Archive
-                        </button>
-                    ) : (
-                        <button className="note-item__archive-button" onClick={this.onArchiveEvent}>
-                            Unarchive
-                        </button>
-                    )}
+                    {
+                        note.archived === false ? (
+                            <button className="note-item__archive-button" onClick={this.onArchiveEvent}>
+                                📥 Archive
+                            </button>
+                        ) : (
+                            <button className="note-item__archive-button" onClick={this.onArchiveEvent}>
+                                📤 Unarchive
+                            </button>
+                        )
+                    }
                     <button className="note-item__delete-button" onClick={this.onDeleteEvent}>
-                        Delete
+                        ❌ Delete
                     </button>
                 </div>
             </div>

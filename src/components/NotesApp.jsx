@@ -30,11 +30,15 @@ class NotesApp extends React.Component {
     }
 
     addNewNoteHandler = (newNoteData) => {
-        this.setState((prevState) => ({
-            notes: [newNoteData, ...prevState.notes],
-            allNotes: [newNoteData, ...prevState.allNotes]
-        }));
+        this.setState((prevState) => {
+            const { notes, allNotes } = prevState;
+            return {
+                notes: [newNoteData, ...notes],
+                allNotes: [newNoteData, ...allNotes]
+            };
+        });
     };
+
 
     onDeleteHandler = (id) => {
         this.setState((prevState) => ({
@@ -44,28 +48,27 @@ class NotesApp extends React.Component {
     };
 
     onArchiveHandler = (id) => {
-        const noteToModify = this.state.allNotes.filter((note) => note.id === id)[0];
+        const noteToModify = this.state.allNotes.find((note) => note.id === id);
         const modifiedNote = { ...noteToModify, archived: !noteToModify.archived };
         this.setState((prevState) => ({
-            notes: [
-                ...prevState.notes.filter((note) => note.id !== id),
-                modifiedNote
-            ],
-            allNotes: [
-                ...prevState.allNotes.filter((note) => note.id !== id),
-                modifiedNote
-            ]
+            notes: prevState.notes.map((note) => (note.id === id ? modifiedNote : note)),
+            allNotes: prevState.allNotes.map((note) => (note.id === id ? modifiedNote : note))
         }));
     };
 
+
     onSearchHandler = (text) => {
-        if (text.length !== 0 && text.trim() !== '') {
+        const { allNotes } = this.state;
+        if (text.trim() !== '') {
+            const filteredNotes = allNotes.filter((note) =>
+                note.title.toLowerCase().includes(text.toLowerCase())
+            );
             this.setState({
-                notes: this.state.allNotes.filter((note) => note.title.toLowerCase().includes(text.toLowerCase()))
+                notes: filteredNotes
             });
         } else {
             this.setState({
-                notes: this.state.allNotes
+                notes: allNotes
             });
         }
     };

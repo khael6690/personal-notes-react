@@ -5,7 +5,7 @@ const Header = ({ onSearch }) => {
 
     return (
         <div className="note-app__header">
-            <h1>My Notes</h1>
+            <h1>My Personal Notes</h1>
             <div className="note-search">
                 <SearchBar onSearch={onSearch} />
             </div>

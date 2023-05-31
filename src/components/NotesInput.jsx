@@ -9,6 +9,8 @@ class NotesInput extends React.Component {
             noteBody: '',
             titleLength: 0
         };
+
+        this.initialState = this.state;
     }
 
     onTitleChange = (event) => {
@@ -53,12 +55,7 @@ class NotesInput extends React.Component {
             };
 
             addNewNote(newData);
-
-            this.setState({
-                title: '',
-                noteBody: '',
-                titleLength: 0
-            });
+            this.setState(this.initialState);
         }
     };
 
@@ -67,7 +64,7 @@ class NotesInput extends React.Component {
 
         return (
             <div className="note-input">
-                <h2>New Note</h2>
+                <h2>New Note 📓</h2>
                 <form>
                     <p className="note-input__title__char-limit">Character left: {50 - titleLength}</p>
                     <input
