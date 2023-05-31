@@ -21,7 +21,7 @@ class NotesInput extends React.Component {
                 titleLength: value.length
             }));
         } else {
-            alert('Max length for title is 50');
+            alert('Max length for title is 50!');
         }
     };
 
